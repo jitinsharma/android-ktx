@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package androidx.os
+@file:Suppress("NOTHING_TO_INLINE")
 
-import android.net.Uri
-import android.support.test.InstrumentationRegistry
-import org.junit.Assert.assertEquals
-import org.junit.Test
-import java.io.File
+package androidx.text
 
-class FileTest {
-    private val context = InstrumentationRegistry.getContext()
+import android.text.Spanned
+import android.text.SpannedString
 
-    @Test
-    fun uri() {
-        val cacheFile = File(context.cacheDir, "red.png")
-        assertEquals(Uri.fromFile(cacheFile), cacheFile.toUri())
-    }
-}
+/**
+ * Returns a new [Spanned] from [CharSequence],
+ * or the source itself if it is already an instance of [SpannedString].
+ */
+inline fun CharSequence.toSpanned(): Spanned = SpannedString.valueOf(this)
+
+/** Get all spans that are instance of [T]. */
+inline fun <reified T : Any> Spanned.getSpans(start: Int = 0, end: Int = length): Array<out T> =
+    getSpans(start, end, T::class.java)

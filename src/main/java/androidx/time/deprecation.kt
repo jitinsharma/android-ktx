@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,9 @@
  * limitations under the License.
  */
 
-@file:Suppress("NOTHING_TO_INLINE") // Aliases to public API.
+package androidx.time
 
-package androidx.os
-
-import android.net.Uri
-import java.io.File
-
-/**
- * Creates a Uri from the given file.
- *
- * @see Uri.parse
- */
-inline fun File.toUri(): Uri = Uri.fromFile(this)
+internal const val TIME_DEPRECATION_MESSAGE = "" +
+        "These extensions are for java.* APIs and not android.* APIs and thus are out of scope " +
+        "for this project. Star https://youtrack.jetbrains.com/issue/KT-21585 for future support " +
+        "of extensions like these. These extensions will be removed before core-ktx 1.0!"

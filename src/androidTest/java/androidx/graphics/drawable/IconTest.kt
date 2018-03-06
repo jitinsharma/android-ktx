@@ -24,7 +24,7 @@ import android.graphics.drawable.Icon
 import android.support.test.InstrumentationRegistry
 import android.support.test.filters.SdkSuppress
 import androidx.graphics.createBitmap
-import androidx.os.toUri
+import androidx.net.toUri
 import okio.Okio.buffer
 import okio.Okio.sink
 import okio.Okio.source
@@ -39,14 +39,14 @@ class IconTest {
     @Test fun fromBitmapAdaptive() {
         val density = context.resources.displayMetrics.density
 
-        val edge = (108 * density).toInt()
+        val edge = (108.0f * density + 0.5f).toInt()
         val bitmap = Bitmap.createBitmap(edge, edge, ARGB_8888).apply {
             eraseColor(Color.RED)
         }
         val icon = bitmap.toAdaptiveIcon()
 
         val rendered = icon.toIntrinsicBitmap()
-        val masked = (72 * density).toInt()
+        val masked = (72.0f * density + 0.5f).toInt()
         assertEquals(masked, rendered.width)
         assertEquals(masked, rendered.height)
         // Grab a pixel from the middle to ensure we are not being masked.
